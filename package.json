@@ -1,6 +1,6 @@
 {
   "name": "serialize-interceptor",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": "nolleh <nolleh7707@gmail.com>",
   "license": "MIT",
   "scripts": {
@@ -14,9 +14,6 @@
     "type": "git",
     "url": "https://github.com/nolleh/serialize-interceptor"
   },
-  "files": [
-    "src/serialize.interceptor.ts"
-  ],
   "keywords": [
     "nestjs",
     "nest.js",
