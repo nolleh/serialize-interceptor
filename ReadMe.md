@@ -1,4 +1,4 @@
-https://app.travis-ci.com/nolleh/serialize-interceptor.svg?branch=master
+![Badge](https://app.travis-ci.com/nolleh/serialize-interceptor.svg?branch=master)
 
 ## Overview
 
