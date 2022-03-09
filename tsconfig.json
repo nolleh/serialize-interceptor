@@ -9,7 +9,10 @@
     "strict": false,
     "baseUrl": "./src",
     "rootDir": "./src",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "paths": {
+      "src/*": ["src/*"]
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["**/node_modules/*", "**/*.spec.ts"]

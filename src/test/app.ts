@@ -2,7 +2,7 @@
 import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from 'test/app.module';
-import { SerializeInterceptor } from 'serialize.interceptor';
+import { SerializeInterceptor } from 'serialize-interceptor';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 // for testcode
 //
@@ -21,7 +21,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   setupSwagger(app);
-  app.useGlobalInterceptors(new SerializeInterceptor);
+  app.useGlobalInterceptors(new SerializeInterceptor());
   await app.listen(3000);
 }
 

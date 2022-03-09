@@ -58,7 +58,7 @@ you can check this code from
 
 ```typescript
 
-import { SerializeInterceptor } from 'serialize.interceptor';
+import { SerializeInterceptor } from 'serialize-interceptor';
 import { NestFactory } from '@nestjs/core';
 ...
 const app = await NestFactory.create(AppModule);
