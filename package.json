@@ -1,0 +1,66 @@
+{
+  "name": "serialize-interceptor",
+  "version": "0.0.1",
+  "author": "nolleh <nolleh7707@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node -r tsconfig-paths/register src/test/app.ts",
+    "test": "jest",
+    "test:cov": "jest --coverage",
+    "lint": "tslint -p tsconfig.json -c tslint.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nolleh/serialize-interceptor"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@nestjs/common": "^8.4.0",
+    "@nestjs/core": "^8.4.0",
+    "@nestjs/platform-express": "^8.4.0",
+    "@nestjs/swagger": "^5.2.0",
+    "jest": "^27.5.1",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.5.4",
+    "swagger-ui-express": "^4.3.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.4.1",
+    "@types/node": "^17.0.21",
+    "ts-jest": "^27.1.3",
+    "ts-node": "^10.7.0",
+    "tsconfig-paths": "^3.13.0",
+    "tslint": "^6.1.3",
+    "typescript": "^4.6.2"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.(j|t)s$",
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node",
+    "globals": {
+      "ts-jest": {
+        "diagnostics": true
+      }
+    }
+  }
+}
