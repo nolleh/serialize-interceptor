@@ -1,5 +1,6 @@
 ![Badge](https://app.travis-ci.com/nolleh/serialize-interceptor.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/nolleh/serialize-interceptor/badge.svg?branch=master)](https://coveralls.io/github/nolleh/serialize-interceptor?branch=master)
+[![npm version](https://badge.fury.io/js/serialize-interceptor.svg)](https://badge.fury.io/js/serialize-interceptor)
 
 ## Overview
 
