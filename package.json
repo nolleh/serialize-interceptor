@@ -1,11 +1,13 @@
 {
   "name": "serialize-interceptor",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "author": "nolleh <nolleh7707@gmail.com>",
   "license": "MIT",
+  "main": "./dist/serialize.interceptor.js",
+  "types": "./dist/serialize.interceptor.d.ts",
   "scripts": {
     "build": "tsc",
-    "start": "ts-node -r tsconfig-paths/register src/test/app.ts",
+    "start": "ts-node -r tsconfig-paths/register test/app.ts",
     "test": "jest",
     "test:cov": "jest --coverage",
     "lint": "tslint -p tsconfig.json -c tslint.json"

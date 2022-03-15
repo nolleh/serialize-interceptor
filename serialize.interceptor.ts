@@ -1,7 +1,6 @@
 
-import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
-import { Observable } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
+import { Injectable } from '@nestjs/common';
+import { map } from 'rxjs/operators';
 
 // where NestInterceptor<T, R>, T is stream of response, R is stream of value
 @Injectable()
@@ -21,7 +20,10 @@ export class SerializeInterceptor {
   }
 }
 
-export function camelToSnake(value) {
+export function camelToSnake(value: any) {
+  if (value === null || value === undefined){
+    return value;
+  }
   if (Array.isArray(value)) {
     return value.map(camelToSnake);
   }
@@ -35,12 +37,16 @@ export function camelToSnake(value) {
   return value;
 }
 
-export function snakeToCamel(value) {
+export function snakeToCamel(value: any) {
+  if (value === null || value === undefined){
+    return value;
+  }
+
   if (Array.isArray(value)) {
     return value.map(snakeToCamel);
   }
 
-  const impl = (str) => {
+  const impl = (str: string) => {
     const converted = str.replace(/([-_]\w)/g, group => group[1].toUpperCase());
     return converted[0].toLowerCase() + converted.slice(1);
   };
@@ -53,7 +59,7 @@ export function snakeToCamel(value) {
   return value;
 }
 
-function recursivelyStripNullValues(value) {
+function recursivelyStripNullValues(value: any) {
   if (Array.isArray(value)) {
     return value.map(recursivelyStripNullValues);
   }

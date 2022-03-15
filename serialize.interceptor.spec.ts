@@ -1,4 +1,4 @@
-import { camelToSnake, snakeToCamel } from 'serialize.interceptor';
+import { camelToSnake, snakeToCamel } from './serialize.interceptor';
 
 describe('serialize.interceptor', () => {
 
