@@ -5,6 +5,7 @@ install:
   - yarn install
 script:
   - yarn test:cov
+  - yarn build
   # send coverage
   #
 after_script: "cat coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
