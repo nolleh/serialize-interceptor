@@ -4,10 +4,11 @@
     "target": "es2019",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "esModuleInterop":true,
+    "esModuleInterop": true,
     "moduleResolution": "node",
     "strict": false,
     "outDir": "./dist",
-    "declaration": true
+    "declaration": true,
+    "baseUrl": "./src"
   }
 }
