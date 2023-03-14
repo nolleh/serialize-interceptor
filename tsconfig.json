@@ -8,7 +8,6 @@
     "moduleResolution": "node",
     "strict": false,
     "outDir": "./dist",
-    "declaration": true,
-    "baseUrl": "./src"
+    "declaration": true
   }
 }
