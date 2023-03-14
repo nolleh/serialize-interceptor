@@ -1,10 +1,10 @@
 {
   "name": "serialize-interceptor",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "nolleh <nolleh7707@gmail.com>",
   "license": "MIT",
-  "main": "./dist/serialize.interceptor.js",
-  "types": "./dist/serialize.interceptor.d.ts",
+  "main": "./dist/src/serialize.interceptor.js",
+  "types": "./dist/src/serialize.interceptor.d.ts",
   "scripts": {
     "build": "tsc",
     "start": "ts-node -r tsconfig-paths/register test/app.ts",
