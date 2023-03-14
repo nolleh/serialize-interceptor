@@ -1,10 +1,13 @@
 {
   "name": "serialize-interceptor",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "nolleh <nolleh7707@gmail.com>",
   "license": "MIT",
-  "main": "./dist/serialize-interceptor/index.js",
-  "types": "./dist/serialize-interceptor/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "./dist"
+  ],
   "scripts": {
     "build": "tsc",
     "start": "ts-node -r tsconfig-paths/register test/app.ts",
@@ -12,7 +15,7 @@
     "test:cov": "jest --coverage",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "prepare": "husky install",
-    "format": "prettier -w \"serialize-interceptor/**/*.ts\" \"test/**/*.ts\""
+    "format": "prettier -w \"*.ts\" \"test/**/*.ts\""
   },
   "repository": {
     "type": "git",
@@ -39,7 +42,6 @@
     "jest": "^27.5.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.5.4",
-    "serialize-interceptor": "link:/Users/nolleh/Documents/workspace_github/serialize-interceptor/serialize-interceptor",
     "swagger-ui-express": "^4.3.0"
   },
   "devDependencies": {
@@ -53,7 +55,8 @@
     "ts-node": "^10.7.0",
     "tsconfig-paths": "^3.13.0",
     "tslint": "^6.1.3",
-    "typescript": "^4.6.2"
+    "typescript": "^4.6.2",
+    "serialize-interceptor": "link:/Users/nolleh/Documents/workspace_github/serialize-interceptor"
   },
   "jest": {
     "transform": {
