@@ -1,30 +1,29 @@
-import { ApiTags, ApiProperty } from '@nestjs/swagger';
-import { Post, Body, Controller } from '@nestjs/common';
+import { ApiTags, ApiProperty } from "@nestjs/swagger";
+import { Post, Body, Controller } from "@nestjs/common";
 
 class Dto {
   @ApiProperty()
-  startWithCapital: string
+  startWithCapital: string;
   @ApiProperty()
-  camelCase: string
+  camelCase: string;
   @ApiProperty()
-  snakeCase: string
+  snakeCase: string;
 }
 
 class NestedDto {
   @ApiProperty()
-  startWithCapital: string
+  startWithCapital: string;
   @ApiProperty()
-  camelCase: string
+  camelCase: string;
   @ApiProperty()
-  snakeCase: string
+  snakeCase: string;
   @ApiProperty()
-  nested: Dto
+  nested: Dto;
 }
 
-@Controller('test')
-@ApiTags('test Api')
+@Controller("test")
+@ApiTags("test Api")
 export class AppController {
-
   /* 
   '{
     "StartWithCapital": "string",
@@ -36,7 +35,7 @@ export class AppController {
       "snake_case": "string"
     }
   }'
-   * */ 
+   * */
   @Post()
   async myController(@Body() dto: NestedDto): Promise<NestedDto> {
     const res = new NestedDto();
@@ -51,4 +50,3 @@ export class AppController {
     return res;
   }
 }
-

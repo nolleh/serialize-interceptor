@@ -10,7 +10,9 @@
     "start": "ts-node -r tsconfig-paths/register test/app.ts",
     "test": "jest",
     "test:cov": "jest --coverage",
-    "lint": "tslint -p tsconfig.json -c tslint.json"
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "prepare": "husky install",
+    "format": "prettier -w \"*.ts\" \"test/**/*.ts\""
   },
   "repository": {
     "type": "git",
@@ -44,11 +46,13 @@
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.21",
     "coveralls": "^3.1.1",
+    "lint-staged": "^13.2.0",
     "ts-jest": "^27.1.3",
     "ts-node": "^10.7.0",
     "tsconfig-paths": "^3.13.0",
     "tslint": "^6.1.3",
-    "typescript": "^4.6.2"
+    "typescript": "^4.6.2",
+    "husky": "^8.0.0"
   },
   "jest": {
     "transform": {
@@ -74,5 +78,8 @@
         "diagnostics": true
       }
     }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,json,md}": "pnpm format"
   }
 }
