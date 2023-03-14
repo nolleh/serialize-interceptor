@@ -2,7 +2,7 @@
 import { INestApplication } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
-import { SerializeInterceptor } from "../serialize.interceptor";
+import { SerializeInterceptor } from "src/serialize.interceptor";
 import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 // for testcode
 //
