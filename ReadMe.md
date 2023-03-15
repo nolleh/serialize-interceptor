@@ -1,5 +1,5 @@
 [![Build Status](https://app.travis-ci.com/nolleh/serialize-interceptor.svg?branch=master)](https://app.travis-ci.com/nolleh/serialize-interceptor)
-[![Coverage Status](https://coveralls.io/repos/github/nolleh/serialize-interceptor/badge.svg?branch=master)](https://coveralls.io/github/nolleh/serialize-interceptor?branch=master)
+[![Coverage Status](https://github.com/nolleh/serialize-interceptor/raw/gh-pages/badges/coverage-jest%20coverage.svg?raw=true)](https://nolleh.github.io/serialize-interceptor/badges/coverage-jest%20coverage.svg?raw=true)
 [![npm version](https://badge.fury.io/js/serialize-interceptor.svg)](https://badge.fury.io/js/serialize-interceptor)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -17,16 +17,16 @@ model layer: camel
 
 It also works to nested object.
 
+## example
 
-## example 
+when client send below data,
 
-when client send below data, 
 ```json
-{ 
+{
   "name": "nolleh",
   "email": "nolleh7707@gmail.com",
   "some_snake_data": "hello world"
-  "live": { 
+  "live": {
     "country": "South Korea",
     "city": "Seongnam",
     "some_snake_data": "hello world2"
@@ -35,7 +35,6 @@ when client send below data,
 ```
 
 you can retrieve as (in code)
-
 
 ```typescript
 class LiveDto {
@@ -54,8 +53,9 @@ class MyDto {
 ```
 
 ## Usage
+
 in your main code, put this.
-you can check this code from 
+you can check this code from
 []("https://github.com/nolleh/serialize-interceptor/test/app.ts")
 
 ```typescript
@@ -72,5 +72,5 @@ app.useGlobalInterceptors(new SerializeInterceptor);
 ## Dependencies
 
 nestjs
-> designed for nestjs interceptor.
 
+> designed for nestjs interceptor.
