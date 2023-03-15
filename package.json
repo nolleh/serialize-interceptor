@@ -12,7 +12,7 @@
     "build": "tsc",
     "start": "ts-node -r tsconfig-paths/register test/app.ts",
     "test": "jest",
-    "test:cov": "jest --coverage",
+    "test:cov": "jest --coverage --reporter=json-summary",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "prepare": "husky install",
     "format": "prettier -w \"*.ts\" \"test/**/*.ts\""
@@ -75,7 +75,7 @@
     "collectCoverageFrom": [
       "src/**/*.(t|j)s"
     ],
-    "coverageDirectory": "../coverage",
+    "coverageDirectory": "./coverage",
     "testEnvironment": "node",
     "globals": {
       "ts-jest": {
