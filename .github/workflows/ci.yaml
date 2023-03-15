@@ -17,7 +17,7 @@ jobs:
       - name: generate badge
         uses: jpb06/jest-badges-action@latest
         with:
-          branches: master, feat/github-ci
+          branches: master,feat/github-ci
       - name: publish cov report to github pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
