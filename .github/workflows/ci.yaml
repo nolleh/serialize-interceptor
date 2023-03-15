@@ -8,7 +8,17 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
-      - run: |
+      - name: Install
+        run: |
           npm install -g pnpm
           pnpm i
-          pnpm test
+      - name: Test and Cov
+        run: pnpm test:cov
+      - name: generate badge
+        uses: jpb06/jest-badges-action@latest
+        with:
+          branches: maste
+      - name: publish cov report to github pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: badges
