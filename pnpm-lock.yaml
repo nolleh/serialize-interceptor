@@ -15,7 +15,7 @@ specifiers:
   lint-staged: ^13.2.0
   reflect-metadata: ^0.1.13
   rxjs: ^7.5.4
-  serialize-interceptor: link:/Users/nolleh/Documents/workspace_github/serialize-interceptor
+  serialize-interceptor: link:src
   swagger-ui-express: ^4.3.0
   ts-jest: ^27.1.3
   ts-node: ^10.7.0
@@ -41,7 +41,7 @@ devDependencies:
   husky: 8.0.3
   jest-mock-extended: 3.0.4_cnngzrja2umb46xxazlucyx2qu
   lint-staged: 13.2.0
-  serialize-interceptor: 'link:'
+  serialize-interceptor: link:src
   ts-jest: 27.1.5_n4jzo3ixy42kfaqevs43wjx5ui
   ts-node: 10.9.1_cbfmry4sbbh4vatmdrsmatfg5a
   tsconfig-paths: 3.14.2

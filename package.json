@@ -52,12 +52,12 @@
     "husky": "^8.0.0",
     "jest-mock-extended": "^3.0.4",
     "lint-staged": "^13.2.0",
-    "serialize-interceptor": "link:/Users/nolleh/Documents/workspace_github/src/serialize-interceptor",
     "ts-jest": "^27.1.3",
     "ts-node": "^10.7.0",
     "tsconfig-paths": "^3.13.0",
     "tslint": "^6.1.3",
-    "typescript": "^4.6.2"
+    "typescript": "^4.6.2",
+    "serialize-interceptor": "link:src"
   },
   "jest": {
     "transform": {
