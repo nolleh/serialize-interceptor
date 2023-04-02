@@ -3,8 +3,8 @@
   "version": "1.0.6",
   "author": "nolleh <nolleh7707@gmail.com>",
   "license": "MIT",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
   "files": [
     "./dist"
   ],
@@ -15,7 +15,7 @@
     "test:cov": "jest --coverage",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "prepare": "husky install",
-    "format": "prettier -w \"*.ts\" \"test/**/*.ts\""
+    "format": "prettier -w \"src/*.ts\" \"test/**/*.ts\""
   },
   "repository": {
     "type": "git",
@@ -50,13 +50,14 @@
     "@types/node": "^18.15.3",
     "coveralls": "^3.1.1",
     "husky": "^8.0.0",
+    "jest-mock-extended": "^3.0.4",
     "lint-staged": "^13.2.0",
+    "serialize-interceptor": "link:/Users/nolleh/Documents/workspace_github/src/serialize-interceptor",
     "ts-jest": "^27.1.3",
     "ts-node": "^10.7.0",
     "tsconfig-paths": "^3.13.0",
     "tslint": "^6.1.3",
-    "typescript": "^4.6.2",
-    "serialize-interceptor": "link:/Users/nolleh/Documents/workspace_github/serialize-interceptor"
+    "typescript": "^4.6.2"
   },
   "jest": {
     "transform": {
@@ -73,7 +74,7 @@
     ],
     "testRegex": ".*\\.spec\\.(j|t)s$",
     "collectCoverageFrom": [
-      "*.(t|j)s"
+      "src/*.(t|j)s"
     ],
     "coverageDirectory": "./coverage",
     "coverageReporters": [

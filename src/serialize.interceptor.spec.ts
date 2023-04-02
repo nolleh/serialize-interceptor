@@ -1,23 +1,67 @@
-import { camelToSnake, snakeToCamel } from "./serialize.interceptor";
+import { ExecutionContext } from "@nestjs/common";
+import { SerializeInterceptor, camelToSnake, snakeToCamel } from "./index";
+import { Observable } from "rxjs";
+
+import { DeepMockProxy, mockDeep } from "jest-mock-extended";
+import { HttpArgumentsHost } from "@nestjs/common/interfaces";
 
 describe("serialize.interceptor", () => {
-  beforeEach(() => {});
+  describe("interceptor", () => {
+    let interceptor: SerializeInterceptor;
+    let executionContext: DeepMockProxy<ExecutionContext>;
+    beforeEach(() => {
+      interceptor = new SerializeInterceptor();
+      executionContext = mockDeep<ExecutionContext>();
+    });
+
+    it("should intercept", () => {
+      const switchResp = mockDeep<HttpArgumentsHost>();
+      const body = new Dto();
+      body.StartWithCapital = "StartWithCapital";
+      body.camelCase = "camelCase";
+      body.snake_case = "snake_case";
+      body.nullValue = null;
+      switchResp.getRequest.mockReturnValueOnce({ request: { body } });
+      executionContext.switchToHttp.mockReturnValueOnce(switchResp);
+      // mocking nest js's observable.
+      const observer = new Observable((subscriber) => {
+        subscriber.next({ request: body });
+        subscriber.complete();
+      });
+      observer.subscribe({
+        next(x) {
+          expect(x["request"].StartWithCapital).toBe(body.StartWithCapital);
+        },
+      });
+      interceptor.intercept(executionContext, {
+        handle: () => {
+          return observer;
+        },
+      });
+    });
+  });
 
   it("camelToSnake test", () => {
     const dto = new Dto();
     dto.StartWithCapital = "StartWithCapital";
     dto.camelCase = "camelCase";
     dto.snake_case = "snake_case";
+    dto.array = [1, 2, 3, 4];
+    dto.arrayWithCamel = ["have", "a", "nice", "day"];
+    dto.nullValue = null;
     const resp = camelToSnake(dto);
 
+    // expect(resp).toBe(dto);
     expect(resp.start_with_capital).toBe(dto.StartWithCapital);
     expect(resp.camel_case).toBe(dto.camelCase);
     expect(resp.snake_case).toBe(dto.snake_case);
+    expect(resp.array).toStrictEqual(dto.array);
+    expect(resp.array_with_camel).toStrictEqual(dto.arrayWithCamel);
   });
 
   it("nestedObject camelToSnake test", () => {
     const dto = new NestedDto();
-    dto.StartWithCapital = 1;
+    dto.StartWithCapital = "hello";
     dto.camelCase = "camelCase";
     dto.snake_case = "snake_case";
     const nested = new Dto();
@@ -41,16 +85,21 @@ describe("serialize.interceptor", () => {
     dto.StartWithCapital = "StartWithCapital";
     dto.camelCase = "camelCase";
     dto.snake_case = "snake_case";
+    dto.arrayWithCamel = ["array", "with", "camel"];
+    dto.array_with_snake = ["array", "with", "snake"];
+    dto.nullValue = null;
     const resp = snakeToCamel(dto);
 
     expect(resp.startWithCapital).toBe(dto.StartWithCapital);
     expect(resp.camelCase).toBe(dto.camelCase);
     expect(resp.snakeCase).toBe(dto.snake_case);
+    expect(resp.arrayWithCamel).toStrictEqual(dto.arrayWithCamel);
+    expect(resp.arrayWithSnake).toStrictEqual(dto.array_with_snake);
   });
 
   it("nestedObject snakeToCamel test", () => {
     const dto = new NestedDto();
-    dto.StartWithCapital = 1;
+    dto.StartWithCapital = "hello";
     dto.camelCase = "camelCase";
     dto.snake_case = "snake_case";
     const nested = new Dto();
@@ -71,14 +120,18 @@ describe("serialize.interceptor", () => {
 });
 
 class Dto {
-  StartWithCapital;
-  camelCase;
-  snake_case;
+  StartWithCapital: string;
+  camelCase: string;
+  snake_case: string;
+  array: number[];
+  arrayWithCamel: string[];
+  array_with_snake: string[];
+  nullValue: null;
 }
 
 class NestedDto {
-  StartWithCapital;
-  camelCase;
-  snake_case;
-  nested;
+  StartWithCapital: string;
+  camelCase: string;
+  snake_case: string;
+  nested: Dto;
 }

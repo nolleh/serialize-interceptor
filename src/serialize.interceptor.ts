@@ -1,22 +1,24 @@
-import { Injectable } from "@nestjs/common";
+import {
+  ExecutionContext,
+  Injectable,
+  NestInterceptor,
+  CallHandler,
+} from "@nestjs/common";
+import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
 // where NestInterceptor<T, R>, T is stream of response, R is stream of value
 @Injectable()
-export class SerializeInterceptor {
-  intercept(context, next) {
+export class SerializeInterceptor implements NestInterceptor<any, any> {
+  intercept(
+    context: ExecutionContext,
+    next: CallHandler<any>
+  ): Observable<any> {
     let request = context.switchToHttp().getRequest();
-    // console.log(request.body);
     request.body = snakeToCamel(request.body);
-    // console.log(request.body);
 
     // handle returns stream..
-    return (
-      next
-        .handle()
-        //.pipe(map(value => JSON.stringify(value).split(/(?=[A-Z])/).join('_').toLowerCase()));
-        .pipe(map((value) => camelToSnake(value)))
-    );
+    return next.handle().pipe(map((value) => camelToSnake(value)));
   }
 }
 

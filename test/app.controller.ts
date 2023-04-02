@@ -6,8 +6,14 @@ class Dto {
   startWithCapital: string;
   @ApiProperty()
   camelCase: string;
-  @ApiProperty()
+  @ApiProperty({ name: "snake_case" })
   snakeCase: string;
+  @ApiProperty()
+  array: number[];
+  @ApiProperty()
+  arrayWithCamel: string[];
+  @ApiProperty({ name: "array_with_snake" })
+  arrayWithSnake: string[];
 }
 
 class NestedDto {
@@ -46,6 +52,9 @@ export class AppController {
     nested.startWithCapital = dto.nested.startWithCapital;
     nested.camelCase = dto.nested.camelCase;
     nested.snakeCase = dto.nested.snakeCase;
+    nested.array = dto.nested.array;
+    nested.arrayWithCamel = dto.nested.arrayWithCamel;
+    nested.arrayWithSnake = dto.nested.arrayWithSnake;
     res.nested = nested;
     return res;
   }

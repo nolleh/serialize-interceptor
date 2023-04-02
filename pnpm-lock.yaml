@@ -11,6 +11,7 @@ specifiers:
   coveralls: ^3.1.1
   husky: ^8.0.0
   jest: ^27.5.1
+  jest-mock-extended: ^3.0.4
   lint-staged: ^13.2.0
   reflect-metadata: ^0.1.13
   rxjs: ^7.5.4
@@ -38,6 +39,7 @@ devDependencies:
   '@types/node': 18.15.3
   coveralls: 3.1.1
   husky: 8.0.3
+  jest-mock-extended: 3.0.4_cnngzrja2umb46xxazlucyx2qu
   lint-staged: 13.2.0
   serialize-interceptor: 'link:'
   ts-jest: 27.1.5_n4jzo3ixy42kfaqevs43wjx5ui
@@ -2270,6 +2272,17 @@ packages:
       slash: 3.0.0
       stack-utils: 2.0.6
 
+  /jest-mock-extended/3.0.4_cnngzrja2umb46xxazlucyx2qu:
+    resolution: {integrity: sha512-2ynEZ7IEJNrhrgshklDMhrOdnmW4Nt+PhkyRqZxRgpwMo7JjmFWMzyp0+eSyk+H9KK1QjXI5xTZIw6x7cVDcRg==}
+    peerDependencies:
+      jest: ^24.0.0 || ^25.0.0 || ^26.0.0 || ^27.0.0 || ^28.0.0 || ^29.0.0
+      typescript: ^3.0.0 || ^4.0.0 || ^5.0.0
+    dependencies:
+      jest: 27.5.1_ts-node@10.9.1
+      ts-essentials: 7.0.3_typescript@4.9.5
+      typescript: 4.9.5
+    dev: true
+
   /jest-mock/27.5.1:
     resolution: {integrity: sha512-K4jKbY1d4ENhbrG2zuPWaQBvDly+iZ2yAW+T1fATN78hc0sInwn7wZB8XtlNnvHug5RMwV897Xm4LqmPM4e2Og==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
@@ -3495,6 +3508,14 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       punycode: 2.3.0
+
+  /ts-essentials/7.0.3_typescript@4.9.5:
+    resolution: {integrity: sha512-8+gr5+lqO3G84KdiTSMRLtuyJ+nTBVRKuCrK4lidMPdVeEp0uqC875uE5NMcaA7YYMN7XsNiFQuMvasF8HT/xQ==}
+    peerDependencies:
+      typescript: '>=3.7.0'
+    dependencies:
+      typescript: 4.9.5
+    dev: true
 
   /ts-jest/27.1.5_n4jzo3ixy42kfaqevs43wjx5ui:
     resolution: {integrity: sha512-Xv6jBQPoBEvBq/5i2TeSG9tt/nqkbpcurrEG1b+2yfBrcJelOZF9Ml6dmyMh7bcW9JyFbRYpR5rxROSlBLTZHA==}
