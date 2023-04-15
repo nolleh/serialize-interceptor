@@ -11,7 +11,7 @@ jobs:
       - name: Install
         run: |
           npm install -g pnpm
-          pnpm i
+          pnpm i --no-frozen-lockfile
       - name: Test and Cov
         run: pnpm test:cov
       - name: generate badge
