@@ -14,14 +14,5 @@ jobs:
           pnpm i --no-frozen-lockfile
       - name: Test and Cov
         run: pnpm test:cov
-      - name: generate badge
-        uses: jpb06/jest-badges-action@latest
-        with:
-          no-commit: true
-          branches: master
-      - name: publish cov report to github pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: badges
-          target-folder: badges
-
+      - name: generate badge and pub 2 github pages
+        uses: nolleh/jest-badge-deploy-action@v1.0.2
