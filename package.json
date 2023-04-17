@@ -17,9 +17,10 @@
     "start": "ts-node -r tsconfig-paths/register src/test/app.ts",
     "test": "jest",
     "test:cov": "jest --coverage",
-    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "lint": "eslint './src/**/*.{ts,tsx,js,jsx}'",
+    "lint:fix": "eslint --fix './src/**/*.{ts,tsx,js,jsx}'",
     "prepare": "husky install",
-    "format": "prettier -w 'src/*.ts'"
+    "format": "prettier -w 'src/*.ts' '*.{json,md}'"
   },
   "repository": {
     "type": "git",
@@ -52,17 +53,24 @@
     "@types/express": "^4.17.13",
     "@types/jest": "^27.4.1",
     "@types/node": "^18.15.3",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
     "coveralls": "^3.1.1",
+    "eslint": "^8.38.0",
+    "eslint-config-standard-with-typescript": "^34.0.1",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-promise": "^6.1.1",
     "husky": "^8.0.0",
     "jest": "^27.5.1",
     "jest-mock-extended": "^3.0.4",
     "lint-staged": "^13.2.0",
+    "serialize-interceptor": "link:src",
     "ts-jest": "^27.1.5",
     "ts-node": "^10.7.0",
     "tsconfig-paths": "^3.13.0",
     "tslint": "^6.1.3",
-    "typescript": "^4.6.2",
-    "serialize-interceptor": "link:src"
+    "typescript": "^4.9.5"
   },
   "jest": {
     "transform": {

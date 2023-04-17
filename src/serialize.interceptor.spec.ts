@@ -1,9 +1,9 @@
-import { ExecutionContext } from "@nestjs/common";
+import { type ExecutionContext } from "@nestjs/common";
 import { SerializeInterceptor, camelToSnake, snakeToCamel } from "./index";
 import { Observable } from "rxjs";
 
-import { DeepMockProxy, mockDeep } from "jest-mock-extended";
-import { HttpArgumentsHost } from "@nestjs/common/interfaces";
+import { type DeepMockProxy, mockDeep } from "jest-mock-extended";
+import { type HttpArgumentsHost } from "@nestjs/common/interfaces";
 
 describe("serialize.interceptor", () => {
   describe("interceptor", () => {
@@ -29,8 +29,8 @@ describe("serialize.interceptor", () => {
         subscriber.complete();
       });
       observer.subscribe({
-        next(x) {
-          expect(x["request"].StartWithCapital).toBe(body.StartWithCapital);
+        next(x: any) {
+          expect(x.request.StartWithCapital).toBe(body.StartWithCapital);
         },
       });
       interceptor.intercept(executionContext, {

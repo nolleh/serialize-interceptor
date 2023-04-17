@@ -1,10 +1,10 @@
 import {
-  ExecutionContext,
+  type ExecutionContext,
   Injectable,
-  NestInterceptor,
-  CallHandler,
+  type NestInterceptor,
+  type CallHandler,
 } from "@nestjs/common";
-import { Observable } from "rxjs";
+import { type Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
 // where NestInterceptor<T, R>, T is stream of response, R is stream of value
@@ -14,7 +14,7 @@ export class SerializeInterceptor implements NestInterceptor<any, any> {
     context: ExecutionContext,
     next: CallHandler<any>
   ): Observable<any> {
-    let request = context.switchToHttp().getRequest();
+    const request = context.switchToHttp().getRequest();
     request.body = snakeToCamel(request.body);
 
     // handle returns stream..

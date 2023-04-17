@@ -4,14 +4,19 @@ import { Post, Body, Controller } from "@nestjs/common";
 class Dto {
   @ApiProperty()
   startWithCapital: string;
+
   @ApiProperty()
   camelCase: string;
+
   @ApiProperty({ name: "snake_case" })
   snakeCase: string;
+
   @ApiProperty()
   array: number[];
+
   @ApiProperty()
   arrayWithCamel: string[];
+
   @ApiProperty({ name: "array_with_snake" })
   arrayWithSnake: string[];
 }
@@ -19,10 +24,13 @@ class Dto {
 class NestedDto {
   @ApiProperty()
   startWithCapital: string;
+
   @ApiProperty()
   camelCase: string;
+
   @ApiProperty()
   snakeCase: string;
+
   @ApiProperty()
   nested: Dto;
 }
@@ -30,7 +38,7 @@ class NestedDto {
 @Controller("test")
 @ApiTags("test Api")
 export class AppController {
-  /* 
+  /*
   '{
     "StartWithCapital": "string",
     "camelCase": "string",
