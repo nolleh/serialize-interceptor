@@ -1,6 +1,6 @@
 {
   "name": "serialize-interceptor",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "nolleh <nolleh7707@gmail.com>",
   "license": "MIT",
   "main": "./dist/cjs/index.js",
