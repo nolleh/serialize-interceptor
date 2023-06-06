@@ -49,6 +49,7 @@ describe("serialize.interceptor", () => {
     dto.array = [1, 2, 3, 4];
     dto.arrayWithCamel = ["have", "a", "nice", "day"];
     dto.nullValue = null;
+    dto.date = new Date("2023-05-31T11:43:31.069Z");
     const resp = camelToSnake(dto);
 
     // expect(resp).toBe(dto);
@@ -57,6 +58,7 @@ describe("serialize.interceptor", () => {
     expect(resp.snake_case).toBe(dto.snake_case);
     expect(resp.array).toStrictEqual(dto.array);
     expect(resp.array_with_camel).toStrictEqual(dto.arrayWithCamel);
+    expect(resp.date).toBe(dto.date);
   });
 
   it("nestedObject camelToSnake test", () => {
@@ -88,6 +90,7 @@ describe("serialize.interceptor", () => {
     dto.arrayWithCamel = ["array", "with", "camel"];
     dto.array_with_snake = ["array", "with", "snake"];
     dto.nullValue = null;
+    dto.date = new Date("2023-05-31T11:43:31.069Z");
     const resp = snakeToCamel(dto);
 
     expect(resp.startWithCapital).toBe(dto.StartWithCapital);
@@ -95,6 +98,7 @@ describe("serialize.interceptor", () => {
     expect(resp.snakeCase).toBe(dto.snake_case);
     expect(resp.arrayWithCamel).toStrictEqual(dto.arrayWithCamel);
     expect(resp.arrayWithSnake).toStrictEqual(dto.array_with_snake);
+    expect(resp.date).toBe(dto.date);
   });
 
   it("nestedObject snakeToCamel test", () => {
@@ -127,6 +131,7 @@ class Dto {
   arrayWithCamel: string[];
   array_with_snake: string[];
   nullValue: null;
+  date: Date;
 }
 
 class NestedDto {

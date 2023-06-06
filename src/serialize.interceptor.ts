@@ -30,7 +30,7 @@ export function camelToSnake(value: any) {
     return value.map(camelToSnake);
   }
 
-  if (typeof value === "object") {
+  if (typeof value === "object" && !(value instanceof Date)) {
     return Object.fromEntries(
       Object.entries(value).map(([key, value]) => [
         key
@@ -60,7 +60,7 @@ export function snakeToCamel(value: any) {
     return converted[0].toLowerCase() + converted.slice(1);
   };
 
-  if (typeof value === "object") {
+  if (typeof value === "object" && !(value instanceof Date)) {
     return Object.fromEntries(
       Object.entries(value).map(([key, value]) => [
         impl(key),
