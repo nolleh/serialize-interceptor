@@ -14,5 +14,5 @@ jobs:
           pnpm i --no-frozen-lockfile
       - name: Test and Cov
         run: pnpm test:cov
-      - name: coverage
-        uses: nolleh/jest-badge-deploy-action@latest
+      - name: coverage badge
+        uses: nolleh/jest-badge-deploy-action@v1.0.3
