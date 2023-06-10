@@ -15,4 +15,4 @@ jobs:
       - name: Test and Cov
         run: pnpm test:cov
       - name: coverage badge
-        uses: nolleh/jest-badge-deploy-action@v1.0.3
+        uses: nolleh/jest-badge-deploy-action@latest
