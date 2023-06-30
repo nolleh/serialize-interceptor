@@ -65,7 +65,7 @@
     "jest": "^27.5.1",
     "jest-mock-extended": "^3.0.4",
     "lint-staged": "^13.2.0",
-    "serialize-interceptor": "link:src",
+    "serialize-interceptor": "link:dist/cjs",
     "ts-jest": "^27.1.5",
     "ts-node": "^10.7.0",
     "tsconfig-paths": "^3.13.0",
