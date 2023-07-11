@@ -3,26 +3,47 @@ import {
   Injectable,
   type NestInterceptor,
   type CallHandler,
+  Optional,
 } from "@nestjs/common";
 import { type Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
+/** because the regenerated value's field is differ from original,
+ * it is hard to declare return type.
+ * the input type is also not meaningful.
+ *
+ * in: request layer (default: snakeToCamel),
+ * out: response layer (default: camelToSnake).
+ *
+ * i.e. const DEFAULT_STRATEGY: Strategy = { in: snakeToCamel, out: camelToSnake };
+ */
+export class Strategy {
+  in: (value: any) => any;
+  out: (value: any) => any;
+}
+export const DEFAULT_STRATEGY: Strategy = {
+  in: snakeToCamel,
+  out: camelToSnake,
+};
+
 // where NestInterceptor<T, R>, T is stream of response, R is stream of value
 @Injectable()
 export class SerializeInterceptor implements NestInterceptor<any, any> {
+  constructor(@Optional() readonly strategy: Strategy = DEFAULT_STRATEGY) {}
+
   intercept(
     context: ExecutionContext,
     next: CallHandler<any>
   ): Observable<any> {
     const request = context.switchToHttp().getRequest();
-    request.body = snakeToCamel(request.body);
+    request.body = this.strategy.in(request.body);
 
     // handle returns stream..
-    return next.handle().pipe(map((value) => camelToSnake(value)));
+    return next.handle().pipe(map(this.strategy.out));
   }
 }
 
-export function camelToSnake(value: any) {
+export function camelToSnake<T = any>(value: T) {
   if (value === null || value === undefined) {
     return value;
   }
@@ -44,7 +65,7 @@ export function camelToSnake(value: any) {
   return value;
 }
 
-export function snakeToCamel(value: any) {
+export function snakeToCamel<T = any>(value: T) {
   if (value === null || value === undefined) {
     return value;
   }

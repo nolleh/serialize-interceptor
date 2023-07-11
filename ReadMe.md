@@ -67,7 +67,87 @@ const app = await NestFactory.create(AppModule);
 /** use our interceptor **/
 app.useGlobalInterceptors(new SerializeInterceptor);
 
+// @since 1.1.5
+// if you want to customize serializer, then put your strategy.
+// const strategy: Strategy = {
+//   in: DEFAULT_STRATEGY.in,
+//   out: (v) => {
+//     // return 'test-swallow up!';
+//     return snakeToCamel(v)
+//   },
+// };
+// app.useGlobalInterceptors(new SerializeInterceptor(strategy));
 ```
+
+OR in module
+
+```typescript
+@Module({
+  controllers: [AppController],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: SerializeInterceptor,
+    },
+
+    /**  @since 1.1.5
+    // if you want to customize serializer, then put your strategy.
+    {
+      provide: Strategy,
+      useFactory: () => ({
+        in: DEFAULT_STRATEGY.in,
+        out: (v) => {
+          // return 'test-swallow up!';
+          // your custom func. the default for 'out' is.. snakeToCamel.
+          return snakeToCamel(v);
+        },
+      }),
+    },
+    **/
+})
+
+export class AppModule {}
+```
+
+## Customed Serializer (Strategy)
+
+you can put your serialize strategy as you wish, that briefly shown in above snippet.
+
+serializeInterceptor provides classes to help definition your own class.
+
+```typescript
+/** because the regenerated value's field is differ from original,
+ * it is hard to declare return type.
+ * the input type is also not meaningful.
+ *
+ * in: request layer (default: snakeToCamel),
+ * out: response layer (default: camelToSnake).
+ *
+ * i.e. const DEFAULT_STRATEGY: Strategy = { in: snakeToCamel, out: camelToSnake };
+ */
+export class Strategy {
+  in: (value: any) => any;
+  out: (value: any) => any;
+}
+export const DEFAULT_STRATEGY: Strategy = {
+  in: snakeToCamel,
+  out: camelToSnake,
+};
+```
+
+as you can see, implementing class `Strategy` that contains in/out function,
+and put it as constructor (by injecting or creating new one),
+then the interceptor will work as you defined.
+
+🤔 is there A strategy that one you want to be provided by this lib?  
+let me know!
+
+for now :
+
+| Name         | Desc           | Remark                    |
+| ------------ | -------------- | ------------------------- |
+| snakeToCamel | snake -> camel | default for in (request)  |
+| camelToSnake | camel -> snake | default for out (reponse) |
 
 ## Dependencies
 

@@ -2,8 +2,9 @@
 import { type INestApplication } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
-import { SerializeInterceptor } from "serialize-interceptor";
+import { SerializeInterceptor, snakeToCamel } from "serialize.interceptor";
 import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
+import { DEFAULT_STRATEGY, Strategy } from "serialize.interceptor";
 // for testcode
 //
 async function setupSwagger(app: INestApplication) {
@@ -21,7 +22,15 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   setupSwagger(app);
-  app.useGlobalInterceptors(new SerializeInterceptor());
+  // app.useGlobalInterceptors(new SerializeInterceptor());
+  // const strategy: Strategy = {
+  //   in: DEFAULT_STRATEGY.in,
+  //   out: (v) => {
+  //     // return 'test-swallow up!';
+  //     return snakeToCamel(v)
+  //   },
+  // };
+  // app.useGlobalInterceptors(new SerializeInterceptor(strategy));
   await app.listen(3000);
 }
 

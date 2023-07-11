@@ -1,5 +1,11 @@
 import { type ExecutionContext } from "@nestjs/common";
-import { SerializeInterceptor, camelToSnake, snakeToCamel } from "./index";
+import {
+  SerializeInterceptor,
+  camelToSnake,
+  snakeToCamel,
+  Strategy,
+  DEFAULT_STRATEGY,
+} from "./index";
 import { Observable } from "rxjs";
 
 import { type DeepMockProxy, mockDeep } from "jest-mock-extended";

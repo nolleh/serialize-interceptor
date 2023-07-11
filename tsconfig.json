@@ -11,6 +11,5 @@
     "baseUrl": "src",
     "outDir": "dist",
     "declaration": true
-  },
-  "exclude": ["src/test/**"]
+  }
 }
