@@ -8,19 +8,8 @@ import {
 import { type Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
-/** because the regenerated value's field is differ from original,
- * it is hard to declare return type.
- * the input type is also not meaningful.
- *
- * in: request layer (default: snakeToCamel),
- * out: response layer (default: camelToSnake).
- *
- * i.e. const DEFAULT_STRATEGY: Strategy = { in: snakeToCamel, out: camelToSnake };
- */
-export class Strategy {
-  in: (value: any) => any;
-  out: (value: any) => any;
-}
+import { Strategy, snakeToCamel, camelToSnake } from "strategy";
+
 export const DEFAULT_STRATEGY: Strategy = {
   in: snakeToCamel,
   out: camelToSnake,
@@ -41,53 +30,4 @@ export class SerializeInterceptor implements NestInterceptor<any, any> {
     // handle returns stream..
     return next.handle().pipe(map(this.strategy.out));
   }
-}
-
-export function camelToSnake<T = any>(value: T) {
-  if (value === null || value === undefined) {
-    return value;
-  }
-  if (Array.isArray(value)) {
-    return value.map(camelToSnake);
-  }
-
-  if (typeof value === "object" && !(value instanceof Date)) {
-    return Object.fromEntries(
-      Object.entries(value).map(([key, value]) => [
-        key
-          .split(/(?=[A-Z])/)
-          .join("_")
-          .toLowerCase(),
-        camelToSnake(value),
-      ])
-    );
-  }
-  return value;
-}
-
-export function snakeToCamel<T = any>(value: T) {
-  if (value === null || value === undefined) {
-    return value;
-  }
-
-  if (Array.isArray(value)) {
-    return value.map(snakeToCamel);
-  }
-
-  const impl = (str: string) => {
-    const converted = str.replace(/([-_]\w)/g, (group) =>
-      group[1].toUpperCase()
-    );
-    return converted[0].toLowerCase() + converted.slice(1);
-  };
-
-  if (typeof value === "object" && !(value instanceof Date)) {
-    return Object.fromEntries(
-      Object.entries(value).map(([key, value]) => [
-        impl(key),
-        snakeToCamel(value),
-      ])
-    );
-  }
-  return value;
 }
