@@ -144,10 +144,16 @@ let me know!
 
 for now :
 
-| Name         | Desc           | Remark                    |
-| ------------ | -------------- | ------------------------- |
-| snakeToCamel | snake -> camel | default for in (request)  |
-| camelToSnake | camel -> snake | default for out (reponse) |
+| Name         | Desc           | Remark (side effect)                                   | Default                    |
+| ------------ | -------------- | ------------------------------------------------------ | -------------------------- |
+| snakeToCamel | snake -> camel | dash(-, kebab) also converted to camel                 | default for in (request)   |
+| camelToSnake | camel -> snake | starting with capital (pascal) also converted to snake | default for out (response) |
+| kebabToCamel | kebab -> camel | X                                                      |                            |
+| camelTokebab | camel -> kebab | X                                                      |                            |
+
+⚠️ the default snakeToCamel / camelToSnake has side effect that also converting kebab, pascal.  
+considering it's usage, couldn't simply say the side effect is disadvantage.  
+but to handle diversity of usage case, there will be soon added additional strategy that doesn't have the effect.
 
 ## Dependencies
 

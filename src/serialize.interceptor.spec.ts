@@ -2,7 +2,12 @@ import { type ExecutionContext } from "@nestjs/common";
 import { Observable } from "rxjs";
 import { SerializeInterceptor } from "./serialize.interceptor";
 
-import { camelToSnake, snakeToCamel } from "./strategy";
+import {
+  camelToSnake,
+  snakeToCamel,
+  camelToKebab,
+  kebabToCamel,
+} from "./strategy";
 
 import { type DeepMockProxy, mockDeep } from "jest-mock-extended";
 import { type HttpArgumentsHost } from "@nestjs/common/interfaces";
@@ -122,6 +127,41 @@ describe("serialize.interceptor", () => {
     expect(resp.nested.startWithCapital).toBe(dto.nested.StartWithCapital);
     expect(resp.nested.camelCase).toBe(dto.nested.camelCase);
     expect(resp.nested.snakeCase).toBe(dto.nested.snake_case);
+  });
+
+  it("camelToKebab test", () => {
+    const dto = new Dto();
+    dto.StartWithCapital = "StartWithCapital";
+    dto.camelCase = "camelCase";
+    dto.array = [1, 2, 3, 4];
+    dto.arrayWithCamel = ["have", "a", "nice", "day"];
+    dto.nullValue = null;
+    dto.date = new Date("2023-05-31T11:43:31.069Z");
+    const resp = camelToKebab(dto);
+
+    // expect(resp).toBe(dto);
+    expect(resp["start-with-capital"]).toBe(dto.StartWithCapital);
+    expect(resp["camel-case"]).toBe(dto.camelCase);
+    expect(resp.array).toStrictEqual(dto.array);
+    expect(resp["array-with-camel"]).toStrictEqual(dto.arrayWithCamel);
+    expect(resp.date).toBe(dto.date);
+  });
+
+  it("kebabToCamel test", () => {
+    const dto = new Dto();
+    dto.StartWithCapital = "StartWithCapital";
+    dto["kebab-case"] = "kebab-case";
+    dto.arrayWithCamel = ["array", "with", "camel"];
+    dto.array_with_snake = ["array", "with", "snake"];
+    dto.nullValue = null;
+    dto.date = new Date("2023-05-31T11:43:31.069Z");
+    const resp = snakeToCamel(dto);
+
+    expect(resp.startWithCapital).toBe(dto.StartWithCapital);
+    expect(resp.kebabCase).toBe(dto["kebab-case"]);
+    expect(resp.arrayWithCamel).toStrictEqual(dto.arrayWithCamel);
+    expect(resp.arrayWithSnake).toStrictEqual(dto.array_with_snake);
+    expect(resp.date).toBe(dto.date);
   });
 });
 
