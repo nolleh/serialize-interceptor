@@ -7,6 +7,8 @@ import {
   snakeToCamel,
   camelToKebab,
   kebabToCamel,
+  camelToSnake2,
+  snakeToCamel2,
 } from "./strategy";
 
 import { type DeepMockProxy, mockDeep } from "jest-mock-extended";
@@ -68,6 +70,62 @@ describe("serialize.interceptor", () => {
     expect(resp.date).toBe(dto.date);
   });
 
+  // camel_to_snake
+  // snake also cover kebab
+  it("camelToSnake, test with kebab", () => {
+    const kebabObj = {};
+    kebabObj["ke-bab"] = "ke-bab";
+
+    const snk = camelToSnake(kebabObj);
+    expect(snk["ke-bab"]).toBe(kebabObj["ke-bab"]);
+
+    const caml = snakeToCamel(snk);
+    expect(caml["keBab"]).toBe(kebabObj["ke-bab"]);
+  });
+
+  it("camelToSnake, should not modify illegally enum value", () => {
+    const enumObj = {
+      vehicleType: "CAR",
+      CAR: "blahblah",
+      MY_CAR: "blahbalah",
+    };
+
+    const snk = camelToSnake(enumObj);
+    expect(snk.vehicle_type).toBe(enumObj.vehicleType);
+    // This is not our purpose
+    // expect(snk.c_a_r).toBe(enumObj.CAR);
+    expect(snk.my_car).toBe(enumObj.MY_CAR);
+    expect(snk.car).toBe(enumObj.CAR);
+  });
+
+  // camel_to_snake
+  // snake also cover kebab
+  it("camelToSnake2, test with kebab", () => {
+    const kebabObj = {};
+    kebabObj["ke-bab"] = "ke-bab";
+
+    const snk = camelToSnake2(kebabObj);
+    expect(snk["ke-bab"]).toBe(kebabObj["ke-bab"]);
+
+    const caml = snakeToCamel2(snk);
+    expect(caml["ke-bab"]).toBe(kebabObj["ke-bab"]);
+  });
+
+  it("camelToSnake2, should not modify enum value", () => {
+    const enumObj = {
+      vehicleType: "CAR",
+      CAR: "blahblah",
+      MY_CAR: "blahbalah",
+    };
+
+    const snk = camelToSnake2(enumObj);
+    expect(snk.vehicle_type).toBe(enumObj.vehicleType);
+    // This is not our purpose
+    // expect(snk.c_a_r).toBe(enumObj.CAR);
+    expect(snk.my_car).toBe(enumObj.MY_CAR);
+    expect(snk.car).toBe(enumObj.CAR);
+  });
+
   it("nestedObject camelToSnake test", () => {
     const dto = new NestedDto();
     dto.StartWithCapital = "hello";
@@ -79,7 +137,7 @@ describe("serialize.interceptor", () => {
     nested.snake_case = "snake_case";
     dto.nested = nested;
 
-    const resp = camelToSnake(dto);
+    const resp = camelToSnake2(dto);
     expect(resp.start_with_capital).toBe(dto.StartWithCapital);
     expect(resp.camel_case).toBe(dto.camelCase);
     expect(resp.snake_case).toBe(dto.snake_case);

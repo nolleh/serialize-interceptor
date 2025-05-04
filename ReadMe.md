@@ -7,19 +7,19 @@
 
 SerializeInterceptor
 
-intercept request/response, and deserialize/serialize to dto data.
+Intercept request/response, and deserialize/serialize to dto data.
 
 1. for request, snake -> camel. (you can retrieve dto using camel, for snake cases json input)
 2. for response, camel -> snake. (you can send dto using camel, and client retrieve snake case json input)
 
-in short, json layer: snake
+In short, json layer: snake
 model layer: camel
 
 It also works to nested object.
 
 ## example
 
-when client send below data,
+When client send below data,
 
 ```json
 {
@@ -34,7 +34,7 @@ when client send below data,
 }
 ```
 
-you can retrieve as (in code)
+You can retrieve as (in code)
 
 ```typescript
 class LiveDto {
@@ -54,7 +54,7 @@ class MyDto {
 
 ## Usage
 
-in your main code, put this.
+In your main code, put this.
 you can check this code from
 []("https://github.com/nolleh/serialize-interceptor/test/app.ts")
 
@@ -111,9 +111,9 @@ export class AppModule {}
 
 ## Customed Serializer (Strategy)
 
-you can put your serialize strategy as you wish, that briefly shown in above snippet.
+You can put your serialize strategy as you wish, that briefly shown in above snippet.
 
-serializeInterceptor provides classes to help definition your own class.
+SerializeInterceptor provides classes to help definition your own class.
 
 ```typescript
 /** because the regenerated value's field is differ from original,
@@ -135,14 +135,14 @@ export const DEFAULT_STRATEGY: Strategy = {
 };
 ```
 
-as you can see, implementing class `Strategy` that contains in/out function,
+As you can see, implementing class `Strategy` that contains in/out function,
 and put it as constructor (by injecting or creating new one),
 then the interceptor will work as you defined.
 
-🤔 is there A strategy that one you want to be provided by this lib?  
+🤔 Is there A strategy that one you want to be provided by this lib?  
 let me know!
 
-for now :
+For now :
 
 | Name         | Desc           | Remark (side effect)                                   | Default                    |
 | ------------ | -------------- | ------------------------------------------------------ | -------------------------- |
@@ -151,12 +151,12 @@ for now :
 | kebabToCamel | kebab -> camel | X                                                      |                            |
 | camelTokebab | camel -> kebab | X                                                      |                            |
 
-⚠️ the default snakeToCamel / camelToSnake has side effect that also converting kebab, pascal.  
+⚠️ The default snakeToCamel / camelToSnake has side effect that also converting kebab, pascal.  
 considering it's usage, couldn't simply say the side effect is disadvantage.  
-but to handle diversity of usage case, there will be soon added additional strategy that doesn't have the effect.
+But to handle diversity of usage case, there will be soon added additional strategy that doesn't have the effect.
 
 ## Dependencies
 
-nestjs
+NestJS
 
-> designed for nestjs interceptor.
+> Designed for NestJS interceptor.

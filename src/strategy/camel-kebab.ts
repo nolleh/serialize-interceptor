@@ -9,10 +9,7 @@ export function camelToKebab<T = any>(value: T) {
   if (typeof value === "object" && !(value instanceof Date)) {
     return Object.fromEntries(
       Object.entries(value).map(([key, value]) => [
-        key
-          .split(/(?=[A-Z])/)
-          .join("-")
-          .toLowerCase(),
+        key.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase(),
         camelToKebab(value),
       ]),
     );
