@@ -7,25 +7,27 @@
 
 SerializeInterceptor
 
-Intercept request/response, and deserialize/serialize to dto data.
+Intercepts request/response data and deserializes/serializes to DTO format.
 
-1. for request, snake -> camel. (you can retrieve dto using camel, for snake cases json input)
-2. for response, camel -> snake. (you can send dto using camel, and client retrieve snake case json input)
+1. For requests: converts snake_case to camelCase (you can use camelCase in your DTO while accepting snake_case JSON input)
+2. For responses: converts camelCase to snake_case (you can use camelCase in your DTO while sending snake_case JSON to clients)
 
-In short, json layer: snake
-model layer: camel
+In summary:
 
-It also works to nested object.
+- JSON layer: snake_case
+- Model layer: camelCase
 
-## example
+This conversion works for nested objects as well.
 
-When client send below data,
+## Example
+
+When a client sends the following data:
 
 ```json
 {
   "name": "nolleh",
   "email": "nolleh7707@gmail.com",
-  "some_snake_data": "hello world"
+  "some_snake_data": "hello world",
   "live": {
     "country": "South Korea",
     "city": "Seongnam",
@@ -34,7 +36,7 @@ When client send below data,
 }
 ```
 
-You can retrieve as (in code)
+You can access it in your code as:
 
 ```typescript
 class LiveDto {
@@ -49,13 +51,12 @@ class MyDto {
   someSnakeData,
   live,
 }
-
 ```
 
 ## Usage
 
-In your main code, put this.
-you can check this code from
+Add this to your main code.
+You can find the complete example at:
 []("https://github.com/nolleh/serialize-interceptor/test/app.ts")
 
 ```typescript
@@ -109,16 +110,16 @@ OR in module
 export class AppModule {}
 ```
 
-## Customed Serializer (Strategy)
+## Custom Serializer (Strategy)
 
-You can put your serialize strategy as you wish, that briefly shown in above snippet.
+You can define your own serialization strategy as shown in the snippets above.
 
-SerializeInterceptor provides classes to help definition your own class.
+SerializeInterceptor provides classes to help you define your own strategy:
 
 ```typescript
-/** because the regenerated value's field is differ from original,
- * it is hard to declare return type.
- * the input type is also not meaningful.
+/** Since the regenerated value's fields differ from the original,
+ * it's challenging to declare the return type.
+ * The input type is also not meaningful.
  *
  * in: request layer (default: snakeToCamel),
  * out: response layer (default: camelToSnake).
@@ -135,25 +136,26 @@ export const DEFAULT_STRATEGY: Strategy = {
 };
 ```
 
-As you can see, implementing class `Strategy` that contains in/out function,
-and put it as constructor (by injecting or creating new one),
-then the interceptor will work as you defined.
+As shown above, implement the `Strategy` class with in/out functions,
+and provide it as a constructor (either through injection or by creating a new instance).
+The interceptor will then work according to your definition.
 
-🤔 Is there A strategy that one you want to be provided by this lib?  
-let me know!
+🤔 Do you need a specific strategy that you'd like to see provided by this library?  
+Let me know!
 
-For now :
+Available strategies:
 
-| Name         | Desc           | Remark (side effect)                                   | Default                    |
-| ------------ | -------------- | ------------------------------------------------------ | -------------------------- |
-| snakeToCamel | snake -> camel | dash(-, kebab) also converted to camel                 | default for in (request)   |
-| camelToSnake | camel -> snake | starting with capital (pascal) also converted to snake | default for out (response) |
-| kebabToCamel | kebab -> camel | X                                                      |                            |
-| camelTokebab | camel -> kebab | X                                                      |                            |
+| Name          | Description    | Remark (side effect)                                   | Default                    |
+| ------------- | -------------- | ------------------------------------------------------ | -------------------------- |
+| snakeToCamel  | snake -> camel | dash(-, kebab) also converted to camel                 | default for in (request)   |
+| camelToSnake  | camel -> snake | starting with capital (pascal) also converted to snake | default for out (response) |
+| kebabToCamel  | kebab -> camel | No side effects                                        |                            |
+| camelToKebab  | camel -> kebab | No side effects                                        |                            |
+| camelTosnake2 | camel ↔ snake | without kebab side effects                             |                            |
+| snakeToCamel2 | snake -> camel | without kebab side effects                             |                            |
 
-⚠️ The default snakeToCamel / camelToSnake has side effect that also converting kebab, pascal.  
-considering it's usage, couldn't simply say the side effect is disadvantage.  
-But to handle diversity of usage case, there will be soon added additional strategy that doesn't have the effect.
+⚠️ The default snakeToCamel / camelToSnake has side effects that also convert kebab-case and PascalCase.  
+While these side effects can be useful in many cases, they might not be desirable in all situations.
 
 ## Dependencies
 
