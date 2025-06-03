@@ -22,7 +22,7 @@ export class SerializeInterceptor implements NestInterceptor<any, any> {
 
   intercept(
     context: ExecutionContext,
-    next: CallHandler<any>
+    next: CallHandler<any>,
   ): Observable<any> {
     const request = context.switchToHttp().getRequest();
     request.body = this.strategy.in(request.body);
