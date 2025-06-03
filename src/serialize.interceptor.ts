@@ -8,7 +8,7 @@ import {
 import { type Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
-import { Strategy, snakeToCamel, camelToSnake } from "strategy";
+import { Strategy, snakeToCamel, camelToSnake } from "./strategy";
 
 export const DEFAULT_STRATEGY: Strategy = {
   in: snakeToCamel,
@@ -22,7 +22,7 @@ export class SerializeInterceptor implements NestInterceptor<any, any> {
 
   intercept(
     context: ExecutionContext,
-    next: CallHandler<any>,
+    next: CallHandler<any>
   ): Observable<any> {
     const request = context.switchToHttp().getRequest();
     request.body = this.strategy.in(request.body);
